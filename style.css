@@ -41,24 +41,20 @@ p {
   font-size: 0.9em;
   text-decoration: none;
   border-radius: 8px;
-  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
   padding: 5px;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   cursor: pointer;
-
-  /* Continuous glow */
-  box-shadow: 0 0 15px #0ff, 0 0 20px #ff00ff;
-  animation: glowPulse 2s infinite alternate;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+  animation: rainbowGlow 5s linear infinite;
 }
 
 .links a:hover {
-  background: #333;
-  color: #0ff;
   transform: scale(1.1);
-  box-shadow: 0 0 25px #0ff, 0 0 35px #ff00ff;
+  background: #333;
+  box-shadow: 0 0 25px #fff, 0 0 35px #ff00ff;
 }
 
 .links a:active {
@@ -66,15 +62,12 @@ p {
   box-shadow: 0 0 20px #ff00ff, 0 0 25px #0ff;
 }
 
-/* Glow pulse animation */
-@keyframes glowPulse {
-  0% {
-    box-shadow: 0 0 10px #0ff, 0 0 20px #ff00ff;
-  }
-  50% {
-    box-shadow: 0 0 20px #0ff, 0 0 30px #ff00ff;
-  }
-  100% {
-    box-shadow: 0 0 10px #0ff, 0 0 20px #ff00ff;
-  }
+@keyframes rainbowGlow {
+  0% { box-shadow: 0 0 15px #ff0000, 0 0 20px #ff00ff; }
+  16% { box-shadow: 0 0 15px #ff9900, 0 0 20px #ff00ff; }
+  33% { box-shadow: 0 0 15px #ffff00, 0 0 20px #ff00ff; }
+  50% { box-shadow: 0 0 15px #00ff00, 0 0 20px #ff00ff; }
+  66% { box-shadow: 0 0 15px #00ffff, 0 0 20px #ff00ff; }
+  83% { box-shadow: 0 0 15px #0000ff, 0 0 20px #ff00ff; }
+  100% { box-shadow: 0 0 15px #ff00ff, 0 0 20px #ff00ff; }
 }
