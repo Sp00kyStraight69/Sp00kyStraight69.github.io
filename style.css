@@ -1,1 +1,54 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+}
 
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.links {
+  margin-top: 30px;
+}
+
+.animated-btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 25px;
+  color: #fff;
+  text-decoration: none;
+  background-color: #69ffff;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.15s ease;
+}
+
+.animated-btn:hover {
+  transform: scale(1.05);
+}
+
+.animated-btn.clicked {
+  animation: clickAnim 0.2s forwards;
+}
+
+@keyframes clickAnim {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
