@@ -7,10 +7,11 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #000;
+      color: #fff;
       text-align: center;
       padding: 50px;
-      user-select: none; 
+      user-select: none;
+      background-color: #000;
       transition: opacity 0.3s;
     }
 
@@ -30,7 +31,7 @@
       padding: 12px 25px;
       color: #000;
       text-decoration: none;
-      background-color: #69ffff; 
+      background-color: #69ffff;
       border-radius: 8px;
       font-weight: bold;
       transition: transform 0.15s ease;
@@ -76,9 +77,8 @@
       });
     });
 
-    document.addEventListener('contextmenu', e => e.preventDefault()); 
+    document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('keydown', e => {
-
       if ((e.ctrlKey && ['c','s','u','a'].includes(e.key.toLowerCase())) ||
           (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
           e.key === 'F12') {
@@ -104,7 +104,8 @@
         page.classList.remove('hidden');
       }
     };
-    setInterval(detectDevTools, 1000); 
+
+    setInterval(detectDevTools, 1000);
   </script>
 </body>
 </html>
