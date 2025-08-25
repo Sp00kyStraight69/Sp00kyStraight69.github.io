@@ -5,20 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sp00kyStraight69's Website</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #ffffff;
-      text-align: center;
-      padding: 50px;
-      user-select: none;
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
       background-color: #000;
-      transition: opacity 0.3s;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
     }
 
-    .hidden {
-      opacity: 0;
-      pointer-events: none;
-      user-select: none;
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
     }
 
     .links {
@@ -29,7 +32,7 @@
       display: inline-block;
       margin: 10px;
       padding: 12px 25px;
-      color: #000;
+      color: #fff;
       text-decoration: none;
       background-color: #69ffff;
       border-radius: 8px;
@@ -53,13 +56,15 @@
   </style>
 </head>
 <body id="page">
-  <h1>Hi I'm Sp00kyStraight69</h1>
-  <p>Welcome to my website</p>
+  <div class="container">
+    <h1>Hi I'm Sp00kyStraight69</h1>
+    <p>Welcome to my website</p>
 
-  <div class="links">
-    <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="animated-btn">My YouTube Channel</a>
-    <a data-link="https://youtu.be/dQw4w9WgXcQ" class="animated-btn">Terms</a>
-    <a data-link="https://painscreen.is-a.dev/" class="animated-btn">Check out my friend website</a>
+    <div class="links">
+      <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="animated-btn">My YouTube Channel</a>
+      <a data-link="https://youtu.be/dQw4w9WgXcQ" class="animated-btn">Terms</a>
+      <a data-link="https://painscreen.is-a.dev/" class="animated-btn">Check out my friend website</a>
+    </div>
   </div>
 
   <script>
