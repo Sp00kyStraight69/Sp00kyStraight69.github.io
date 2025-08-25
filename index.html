@@ -7,12 +7,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hi I'm Sp00kyStraight69</h1>
+  <h1>Hi, I'm Sp00kyStraight69 👻</h1>
   <p>Welcome to my website</p>
   <div class="links">
-    <a href="https://www.youtube.com/@Sp00kyStraight69" target="_blank">My YouTube Channel</a>
-    <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank">Terms</a>
-    <a href="https://painscreen.is-a.dev/" target="_blank">Check out my friend website cause he is awesome person :D</a>
+    <a data-link="https://www.youtube.com/@Sp00kyStraight69">My YouTube Channel</a>
+    <a data-link="https://youtu.be/dQw4w9WgXcQ">Terms</a>
+    <a data-link="https://painscreen.is-a.dev/">Check out my friend website cause he is awesome person :D</a>
   </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.links a');
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const url = button.getAttribute('data-link');
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          window.location.href = url;
+        }, 150);
+      });
+    });
+  </script>
 </body>
 </html>
