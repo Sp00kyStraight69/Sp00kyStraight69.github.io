@@ -48,16 +48,8 @@ p {
   white-space: nowrap;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
 
-.links a:nth-child(1) {
-  box-shadow: 0 0 15px #ff0000, 0 0 20px #ff00ff; 
-}
-.links a:nth-child(2) {
-  box-shadow: 0 0 15px #00ff00, 0 0 20px #0ff;   
-}
-.links a:nth-child(3) {
-  box-shadow: 0 0 15px #0000ff, 0 0 20px #ff0;   
+  box-shadow: 0 0 15px #0ff, 0 0 20px #ff00ff;
 }
 
 .links a:hover {
