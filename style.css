@@ -30,7 +30,6 @@ p {
   gap: 15px;                
 }
 
-
 .links a {
   display: flex;
   justify-content: center;
@@ -39,26 +38,27 @@ p {
   height: 45px;              
   background: #222;
   color: #eee;
-  font-size: 14px;
+  font-size: 0.9em;
   text-decoration: none;
   border-radius: 8px;
-  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
   padding: 5px;
   text-align: center;
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 0.9em;           
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+  box-shadow: 0 0 15px #0ff;
 }
 
-
 .links a:hover {
-  background: #333;
-  color: #0ff;
   transform: scale(1.1);
-  box-shadow: 0 0 20px #0ff, 0 0 30px #ff00ff;
+  background: #333;
+}
+
+.links a:active {
+  transform: scale(0.95);
 }
 
 .links a:active {
