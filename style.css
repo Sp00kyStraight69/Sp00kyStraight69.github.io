@@ -1,47 +1,72 @@
-html, body {
+:root {
+  --color-bg: linear-gradient(to bottom, #000000, #222222); 
+  --color-btn: #69ffff;
+  --color-text: #ffffff;
+  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --btn-width: 250px;
+  --btn-radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
   height: 100%;
   width: 100%;
-  background-color: #000;
-  color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-main);
   user-select: none;
+  background-image: var(--color-bg);
+  background-size: cover;
+  color: var(--color-text);
 }
 
 .container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  min-height: 100%;
+  display: grid;
+  place-items: center;
   text-align: center;
 }
 
+h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
 .links {
-  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
 }
 
 .animated-btn {
   display: inline-block;
-  margin: 10px;
-  padding: 12px 25px;
-  width: 250px;       
-  text-align: center;    
-  color: #fff;
+  width: var(--btn-width);
+  padding: 14px 25px;
+  color: var(--color-text);
   text-decoration: none;
-  background-color: #69ffff;
-  border-radius: 8px;
+  background-color: var(--color-btn);
+  border-radius: var(--btn-radius);
   font-weight: bold;
-  transition: transform 0.15s ease;
-  box-sizing: border-box; 
+  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .animated-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.1) rotate(2deg);
+  background: #4ae6e6;
 }
 
-.animated-btn.clicked {
-  animation: clickAnim 0.2s forwards;
+.animated-btn:active {
+  transform: scale(0.9) rotate(-2deg);
 }
 
 @keyframes clickAnim {
