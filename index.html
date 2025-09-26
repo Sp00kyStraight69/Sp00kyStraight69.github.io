@@ -9,12 +9,13 @@
       --color-bg: linear-gradient(to bottom, #000000, #222222);
       --color-btn: #236dcf;
       --color-text: #ffffff;
-      --font-main: 'VT323', monospace; 
+      --font-main: 'VT323', monospace;
       --btn-width: 250px;
       --btn-radius: 10px;
 
-      --vhs-scanline-color: rgba(0, 0, 0, 0.4);
-      --vhs-flicker-amount: 0.05;
+      /* Aggressive VHS Variables */
+      --vhs-scanline-color: rgba(0, 0, 0, 0.6); /* Darker lines */
+      --vhs-flicker-amount: 0.15; /* More intense flicker */
     }
 
     * {
@@ -36,27 +37,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden; 
+      overflow: hidden;
     }
 
-
+    /* ------------------------------------- */
+    /* AGGRESSIVE VHS SHADER STYLE           */
+    /* ------------------------------------- */
     #page {
-      filter: sepia(0.8) saturate(1.5) contrast(1.2) hue-rotate(5deg);
+      filter: sepia(0.8) saturate(2.5) contrast(1.5) hue-rotate(15deg); /* Stronger filters */
       animation:
-        vhs-flicker 0.1s infinite alternate,
-        vhs-chroma-shift 5s infinite alternate;
+        vhs-flicker 0.05s infinite alternate, /* Faster, more noticeable flicker */
+        vhs-chroma-shift 3s infinite alternate; /* Faster, more obvious wobble */
       overflow: hidden;
     }
 
     .container {
       text-align: center;
+      /* Increased Chromatic Aberration (Fringing) */
       text-shadow:
-        2px 0 0 rgba(255, 0, 0, 0.5),
-        -2px 0 0 rgba(0, 255, 255, 0.5);
+        4px 0 0 rgba(255, 0, 0, 0.7), 
+        -4px 0 0 rgba(0, 255, 255, 0.7);
       z-index: 10;
       position: relative;
     }
 
+    /* Scanlines and Glitch Overlay */
     #page::after {
       content: '';
       position: fixed;
@@ -68,12 +73,12 @@
       z-index: 1000;
       background: repeating-linear-gradient(
         transparent 0,
-        var(--vhs-scanline-color) 1px,
-        transparent 2px
+        var(--vhs-scanline-color) 2px, /* Thicker lines */
+        transparent 3px
       );
       animation:
-        vhs-glitch 2s infinite,
-        vhs-scanlines 0.5s infinite linear;
+        vhs-glitch 1s infinite, /* More frequent glitching */
+        vhs-scanlines 0.2s infinite linear; /* Faster rolling lines */
     }
 
     @keyframes vhs-flicker {
@@ -83,17 +88,18 @@
     }
 
     @keyframes vhs-chroma-shift {
-      0% { transform: translate(1px, 1px); }
-      33% { transform: translate(-1px, 2px); }
-      66% { transform: translate(2px, -1px); }
-      100% { transform: translate(-2px, -2px); }
+      0% { transform: translate(3px, 3px); }
+      33% { transform: translate(-3px, 4px); }
+      66% { transform: translate(4px, -3px); }
+      100% { transform: translate(-4px, -4px); }
     }
 
     @keyframes vhs-glitch {
       0%, 90% { clip-path: inset(0 0 0 0); }
-      92% { clip-path: inset(40% 0 35% 0); }
-      94% { clip-path: inset(5% 0 85% 0); }
-      96% { clip-path: inset(20% 0 10% 0); }
+      91% { clip-path: inset(50% 0 45% 0); }
+      93% { clip-path: inset(10% 0 80% 0); }
+      95% { clip-path: inset(30% 0 20% 0); }
+      97% { clip-path: inset(70% 0 10% 0); }
       100% { clip-path: inset(0 0 0 0); }
     }
 
@@ -101,6 +107,9 @@
       0% { background-position: 0 0; }
       100% { background-position: 0 -100vh; }
     }
+    /* ------------------------------------- */
+    /* END AGGRESSIVE VHS SHADER STYLE       */
+    /* ------------------------------------- */
 
     h1 {
       font-size: 48px;
@@ -146,7 +155,7 @@
       50% { transform: scale(0.9); }
       100% { transform: scale(1); }
     }
-    
+
     .hidden {
       visibility: hidden;
     }
@@ -207,6 +216,10 @@
       }
     };
 
+    setInterval(detectDevTools, 1000);
+  </script>
+</body>
+</html>
     setInterval(detectDevTools, 1000);
   </script>
 </body>
