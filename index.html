@@ -1,144 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sp00kyStraight69's Website</title>
-  <style>
-    :root {
-      --color-bg: linear-gradient(to bottom, #000000, #222222);
-      --color-btn: #236dcf;
-      --color-text: #ffffff;
-      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      --btn-width: 250px;
-      --btn-radius: 10px;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sp00kyStraight69's Website</title>
+  <style>
+    :root {
+      --color-bg: linear-gradient(to bottom, #000000, #222222);
+      --color-btn: #236dcf;
+      --color-text: #ffffff;
+      --font-main: 'VT323', monospace; 
+      --btn-width: 250px;
+      --btn-radius: 10px;
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+      --vhs-scanline-color: rgba(0, 0, 0, 0.4);
+      --vhs-flicker-amount: 0.05;
+    }
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: var(--font-main);
-      user-select: none;
-      background-image: var(--color-bg);
-      background-size: cover;
-      color: var(--color-text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .container {
-      text-align: center;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: var(--font-main);
+      user-select: none;
+      background-image: var(--color-bg);
+      background-size: cover;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden; 
+    }
 
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
 
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-    }
+    #page {
+      filter: sepia(0.8) saturate(1.5) contrast(1.2) hue-rotate(5deg);
+      animation:
+        vhs-flicker 0.1s infinite alternate,
+        vhs-chroma-shift 5s infinite alternate;
+      overflow: hidden;
+    }
 
-    .animated-btn {
-      display: inline-block;
-      width: var(--btn-width);
-      padding: 14px 25px;
-      color: var(--color-text);
-      text-decoration: none;
-      background-color: var(--color-btn);
-      border-radius: var(--btn-radius);
-      font-weight: bold;
-      transition: transform 0.3s ease, background 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
+    .container {
+      text-align: center;
+      text-shadow:
+        2px 0 0 rgba(255, 0, 0, 0.5),
+        -2px 0 0 rgba(0, 255, 255, 0.5);
+      z-index: 10;
+      position: relative;
+    }
 
-    .animated-btn:hover {
-      transform: scale(1.1) rotate(2deg);
-      background: #1991e0;
-    }
+    #page::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      background: repeating-linear-gradient(
+        transparent 0,
+        var(--vhs-scanline-color) 1px,
+        transparent 2px
+      );
+      animation:
+        vhs-glitch 2s infinite,
+        vhs-scanlines 0.5s infinite linear;
+    }
 
-    .animated-btn:active {
-      transform: scale(0.9) rotate(-2deg);
-    }
+    @keyframes vhs-flicker {
+      0% { opacity: 1; }
+      50% { opacity: calc(1 - var(--vhs-flicker-amount)); }
+      100% { opacity: 1; }
+    }
 
-    @keyframes clickAnim {
-      0% { transform: scale(1); }
-      50% { transform: scale(0.9); }
-      100% { transform: scale(1); }
-    }
-  </style>
+    @keyframes vhs-chroma-shift {
+      0% { transform: translate(1px, 1px); }
+      33% { transform: translate(-1px, 2px); }
+      66% { transform: translate(2px, -1px); }
+      100% { transform: translate(-2px, -2px); }
+    }
+
+    @keyframes vhs-glitch {
+      0%, 90% { clip-path: inset(0 0 0 0); }
+      92% { clip-path: inset(40% 0 35% 0); }
+      94% { clip-path: inset(5% 0 85% 0); }
+      96% { clip-path: inset(20% 0 10% 0); }
+      100% { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes vhs-scanlines {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 -100vh; }
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .animated-btn {
+      display: inline-block;
+      width: var(--btn-width);
+      padding: 14px 25px;
+      color: var(--color-text);
+      text-decoration: none;
+      background-color: var(--color-btn);
+      border-radius: var(--btn-radius);
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .animated-btn:hover {
+      transform: scale(1.1) rotate(2deg);
+      background: #1991e0;
+    }
+
+    .animated-btn:active {
+      transform: scale(0.9) rotate(-2deg);
+    }
+
+    @keyframes clickAnim {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+    
+    .hidden {
+      visibility: hidden;
+    }
+  </style>
 </head>
 <body id="page">
-  <div class="container">
-    <h1>Hi I'm Sp00kyStraight69</h1>
-    <p>Welcome to my website</p>
+  <div class="container">
+    <h1>Hi I'm Sp00kyStraight69</h1>
+    <p>Welcome to my website</p>
 
-    <div class="links">
-      <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="animated-btn">My YouTube Channel</a>
-      <a data-link="https://sp00kystraight69.carrd.co" class="animated-btn">My carrd.co</a>
-      <a data-link="https://x.com/Sp00kyStraight" class="animated-btn">My X Account</a>
-    </div>
-  </div>
+    <div class="links">
+      <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="animated-btn">My YouTube Channel</a>
+      <a data-link="https://sp00kystraight69.carrd.co" class="animated-btn">My carrd.co</a>
+      <a data-link="https://x.com/Sp00kyStraight" class="animated-btn">My X Account</a>
+    </div>
+  </div>
 
-  <script>
-    const page = document.getElementById('page');
-    const buttons = document.querySelectorAll('.animated-btn');
+  <script>
+    const page = document.getElementById('page');
+    const buttons = document.querySelectorAll('.animated-btn');
 
-    buttons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        button.classList.add('clicked');
-        const url = button.getAttribute('data-link');
-        setTimeout(() => {
-          window.location.href = url;
-        }, 200);
-      });
-    });
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        button.classList.add('clicked');
+        const url = button.getAttribute('data-link');
+        setTimeout(() => {
+          window.location.href = url;
+        }, 200);
+      });
+    });
 
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if ((e.ctrlKey && ['c','s','u','a'].includes(e.key.toLowerCase())) ||
-          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
-          e.key === 'F12') {
-        e.preventDefault();
-      }
-    });
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey && ['c','s','u','a'].includes(e.key.toLowerCase())) ||
+          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+          e.key === 'F12') {
+        e.preventDefault();
+      }
+    });
 
-    let devtoolsOpen = false;
-    const detectDevTools = () => {
-      const start = new Date();
-      debugger;
-      const end = new Date();
-      if (end - start > 100) {
-        devtoolsOpen = true;
-      } else {
-        devtoolsOpen = false;
-      }
+    let devtoolsOpen = false;
+    const detectDevTools = () => {
+      const start = new Date();
+      debugger;
+      const end = new Date();
+      if (end - start > 100) {
+        devtoolsOpen = true;
+      } else {
+        devtoolsOpen = false;
+      }
 
-      if (devtoolsOpen) {
-        page.classList.add('hidden');
-        window.open("https://www.google.com/search?q=Developer+mode+is+not+allowed", "_blank");
-      } else {
-        page.classList.remove('hidden');
-      }
-    };
+      if (devtoolsOpen) {
+        page.classList.add('hidden');
+        window.open("https://www.google.com/search?q=Developer+mode+is+not+allowed", "_blank");
+      } else {
+        page.classList.remove('hidden');
+      }
+    };
 
-    setInterval(detectDevTools, 1000);
-  </script>
+    setInterval(detectDevTools, 1000);
+  </script>
 </body>
 </html>
