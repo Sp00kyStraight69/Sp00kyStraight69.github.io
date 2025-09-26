@@ -1,223 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sp00kyStraight69's Website</title>
-  <style>
-    :root {
-      --color-bg: linear-gradient(to bottom, #000000, #222222);
-      --color-btn: #236dcf;
-      --color-text: #ffffff;
-      --font-main: 'VT323', monospace;
-      --btn-width: 250px;
-      --btn-radius: 10px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sp00kyStraight69's Website</title>
+  <style>
+    :root {
+      --color-bg: linear-gradient(to bottom, #000000, #222222);
+      --color-btn: #236dcf;
+      --color-text: #ffffff;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --btn-width: 250px;
+      --btn-radius: 10px;
+    }
 
-      /* Aggressive VHS Variables */
-      --vhs-scanline-color: rgba(0, 0, 0, 0.6); /* Darker lines */
-      --vhs-flicker-amount: 0.15; /* More intense flicker */
-    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: var(--font-main);
+      user-select: none;
+      background-image: var(--color-bg);
+      background-size: cover;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+    .container {
+      text-align: center;
+    }
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      font-family: var(--font-main);
-      user-select: none;
-      background-image: var(--color-bg);
-      background-size: cover;
-      color: var(--color-text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
 
-    /* ------------------------------------- */
-    /* AGGRESSIVE VHS SHADER STYLE           */
-    /* ------------------------------------- */
-    #page {
-      filter: sepia(0.8) saturate(2.5) contrast(1.5) hue-rotate(15deg); /* Stronger filters */
-      animation:
-        vhs-flicker 0.05s infinite alternate, /* Faster, more noticeable flicker */
-        vhs-chroma-shift 3s infinite alternate; /* Faster, more obvious wobble */
-      overflow: hidden;
-    }
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
 
-    .container {
-      text-align: center;
-      /* Increased Chromatic Aberration (Fringing) */
-      text-shadow:
-        4px 0 0 rgba(255, 0, 0, 0.7), 
-        -4px 0 0 rgba(0, 255, 255, 0.7);
-      z-index: 10;
-      position: relative;
-    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
 
-    /* Scanlines and Glitch Overlay */
-    #page::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 1000;
-      background: repeating-linear-gradient(
-        transparent 0,
-        var(--vhs-scanline-color) 2px, /* Thicker lines */
-        transparent 3px
-      );
-      animation:
-        vhs-glitch 1s infinite, /* More frequent glitching */
-        vhs-scanlines 0.2s infinite linear; /* Faster rolling lines */
-    }
+    .animated-btn {
+      display: inline-block;
+      width: var(--btn-width);
+      padding: 14px 25px;
+      color: var(--color-text);
+      text-decoration: none;
+      background-color: var(--color-btn);
+      border-radius: var(--btn-radius);
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
 
-    @keyframes vhs-flicker {
-      0% { opacity: 1; }
-      50% { opacity: calc(1 - var(--vhs-flicker-amount)); }
-      100% { opacity: 1; }
-    }
+    .animated-btn:hover {
+      transform: scale(1.1) rotate(2deg);
+      background: #1991e0;
+    }
 
-    @keyframes vhs-chroma-shift {
-      0% { transform: translate(3px, 3px); }
-      33% { transform: translate(-3px, 4px); }
-      66% { transform: translate(4px, -3px); }
-      100% { transform: translate(-4px, -4px); }
-    }
+    .animated-btn:active {
+      transform: scale(0.9) rotate(-2deg);
+    }
 
-    @keyframes vhs-glitch {
-      0%, 90% { clip-path: inset(0 0 0 0); }
-      91% { clip-path: inset(50% 0 45% 0); }
-      93% { clip-path: inset(10% 0 80% 0); }
-      95% { clip-path: inset(30% 0 20% 0); }
-      97% { clip-path: inset(70% 0 10% 0); }
-      100% { clip-path: inset(0 0 0 0); }
-    }
-
-    @keyframes vhs-scanlines {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 -100vh; }
-    }
-    /* ------------------------------------- */
-    /* END AGGRESSIVE VHS SHADER STYLE       */
-    /* ------------------------------------- */
-
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .animated-btn {
-      display: inline-block;
-      width: var(--btn-width);
-      padding: 14px 25px;
-      color: var(--color-text);
-      text-decoration: none;
-      background-color: var(--color-btn);
-      border-radius: var(--btn-radius);
-      font-weight: bold;
-      transition: transform 0.3s ease, background 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .animated-btn:hover {
-      transform: scale(1.1) rotate(2deg);
-      background: #1991e0;
-    }
-
-    .animated-btn:active {
-      transform: scale(0.9) rotate(-2deg);
-    }
-
-    @keyframes clickAnim {
-      0% { transform: scale(1); }
-      50% { transform: scale(0.9); }
-      100% { transform: scale(1); }
-    }
-
-    .hidden {
-      visibility: hidden;
-    }
-  </style>
+    @keyframes clickAnim {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+    }
+  </style>
 </head>
 <body id="page">
-  <div class="container">
-    <h1>Hi I'm Sp00kyStraight69</h1>
-    <p>Welcome to my website</p>
+  <div class="container">
+    <h1>Hi I'm Sp00kyStraight69</h1>
+    <p>Welcome to my website</p>
 
-    <div class="links">
-      <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="animated-btn">My YouTube Channel</a>
-      <a data-link="https://sp00kystraight69.carrd.co" class="animated-btn">My carrd.co</a>
-      <a data-link="https://x.com/Sp00kyStraight" class="animated-btn">My X Account</a>
-    </div>
-  </div>
+    <div class="links">
+      <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="animated-btn">My YouTube Channel</a>
+      <a data-link="https://sp00kystraight69.carrd.co" class="animated-btn">My carrd.co</a>
+      <a data-link="https://x.com/Sp00kyStraight" class="animated-btn">My X Account</a>
+    </div>
+  </div>
 
-  <script>
-    const page = document.getElementById('page');
-    const buttons = document.querySelectorAll('.animated-btn');
+  <script>
+    const page = document.getElementById('page');
+    const buttons = document.querySelectorAll('.animated-btn');
 
-    buttons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        button.classList.add('clicked');
-        const url = button.getAttribute('data-link');
-        setTimeout(() => {
-          window.location.href = url;
-        }, 200);
-      });
-    });
+    buttons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        button.classList.add('clicked');
+        const url = button.getAttribute('data-link');
+        setTimeout(() => {
+          window.location.href = url;
+        }, 200);
+      });
+    });
 
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if ((e.ctrlKey && ['c','s','u','a'].includes(e.key.toLowerCase())) ||
-          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
-          e.key === 'F12') {
-        e.preventDefault();
-      }
-    });
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey && ['c','s','u','a'].includes(e.key.toLowerCase())) ||
+          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+          e.key === 'F12') {
+        e.preventDefault();
+      }
+    });
 
-    let devtoolsOpen = false;
-    const detectDevTools = () => {
-      const start = new Date();
-      debugger;
-      const end = new Date();
-      if (end - start > 100) {
-        devtoolsOpen = true;
-      } else {
-        devtoolsOpen = false;
-      }
+    let devtoolsOpen = false;
+    const detectDevTools = () => {
+      const start = new Date();
+      debugger;
+      const end = new Date();
+      if (end - start > 100) {
+        devtoolsOpen = true;
+      } else {
+        devtoolsOpen = false;
+      }
 
-      if (devtoolsOpen) {
-        page.classList.add('hidden');
-        window.open("https://www.google.com/search?q=Developer+mode+is+not+allowed", "_blank");
-      } else {
-        page.classList.remove('hidden');
-      }
-    };
+      if (devtoolsOpen) {
+        page.classList.add('hidden');
+        window.open("https://www.google.com/search?q=Developer+mode+is+not+allowed", "_blank");
+      } else {
+        page.classList.remove('hidden');
+      }
+    };
 
-    setInterval(detectDevTools, 1000);
-  </script>
+    setInterval(detectDevTools, 1000);
+  </script>
 </body>
 </html>
     setInterval(detectDevTools, 1000);
