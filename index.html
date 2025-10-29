@@ -6,8 +6,8 @@
   <title>Sp00kyStraight69's Website</title>
   <style>
     :root {
-      --color-bg: linear-gradient(to bottom, #000000, #222222);
       --color-btn: #236dcf;
+      --color-btn-glow: #3f8fff;
       --color-text: #ffffff;
       --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       --btn-width: 250px;
@@ -25,27 +25,70 @@
       width: 100%;
       font-family: var(--font-main);
       user-select: none;
-      background-image: var(--color-bg);
-      background-size: cover;
       color: var(--color-text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: radial-gradient(circle at 30% 30%, #0b0b0b, #000000 40%) fixed,
+                  radial-gradient(circle at 70% 70%, #101010, #000000 60%) fixed,
+                  linear-gradient(125deg, #050505, #0a0a0a, #050505);
+      background-size: 400% 400%;
+      animation: bgGlow 12s ease-in-out infinite;
+      transition: filter 2s ease;
     }
 
-    .container {
+    @keyframes bgGlow {
+      0% { filter: brightness(1) saturate(1); background-position: 0% 50%; }
+      50% { filter: brightness(1.15) saturate(1.2); background-position: 100% 50%; }
+      100% { filter: brightness(1) saturate(1); background-position: 0% 50%; }
+    }
+
+    .paused {
+      animation-play-state: paused !important;
+      filter: brightness(0.95) saturate(0.9);
+    }
+
+    .title-area {
       text-align: center;
+      margin-top: 120px;
+      animation: textFade 4s ease-in-out infinite alternate;
     }
 
-    h1 {
+    @keyframes textFade {
+      0% { opacity: 0.85; }
+      100% { opacity: 1; }
+    }
+
+    .title-area h1 {
       font-size: 48px;
       margin-bottom: 10px;
+      background: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, #ffffff 20%, rgba(255,255,255,0.15) 40%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: glowSweep 6s linear infinite;
+      text-shadow: 0 0 12px rgba(255,255,255,0.1);
     }
 
-    p {
+    @keyframes glowSweep {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .title-area p {
       font-size: 18px;
-      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .button-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
     }
 
     .links {
@@ -66,25 +109,33 @@
       font-weight: bold;
       transition: transform 0.3s ease, background 0.3s ease;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 10px rgba(35,109,207,0.3); }
+      50% { box-shadow: 0 0 25px var(--color-btn-glow); }
+      100% { box-shadow: 0 0 10px rgba(35,109,207,0.3); }
     }
 
     .animated-btn:hover {
       transform: scale(1.1) rotate(2deg);
       background: #1991e0;
+      animation-play-state: paused;
     }
 
     .animated-btn:active {
       transform: scale(0.9) rotate(-2deg);
     }
 
-    #mobile-warning {
+    #warning-screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: black;
-      color: white;
+      color: red;
       display: none;
       align-items: center;
       justify-content: center;
@@ -95,26 +146,28 @@
       padding: 20px;
     }
 
-    #mobile-warning h2 {
-      font-size: 28px;
+    #warning-screen h2 {
+      font-size: 30px;
       margin-bottom: 10px;
     }
 
-    #mobile-warning p {
+    #warning-screen p {
       font-size: 18px;
     }
   </style>
 </head>
 <body id="page">
-  <div id="mobile-warning">
-    <h2>Mobile Not Supported</h2>
+  <div id="warning-screen">
+    <h2>Not Supported</h2>
     <p>This website is only available on desktop. Please visit from a computer.</p>
   </div>
 
-  <div class="container">
+  <div class="title-area">
     <h1>Hi I'm Sp00kyStraight69</h1>
     <p>Welcome to my website</p>
+  </div>
 
+  <div class="button-area">
     <div class="links">
       <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="animated-btn">My YouTube Channel</a>
       <a data-link="https://sp00kystraight69.carrd.co" class="animated-btn">My carrd.co</a>
@@ -123,52 +176,38 @@
   </div>
 
   <script>
-    // Detect mobile devices
-    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-    if (isMobile) {
-      document.getElementById('mobile-warning').style.display = 'flex';
-      document.querySelector('.container').style.display = 'none';
+    const isWindows = navigator.userAgent.includes("Windows");
+    if (!isWindows) {
+      document.getElementById('warning-screen').style.display = 'flex';
+      document.querySelector('.title-area').style.display = 'none';
+      document.querySelector('.button-area').style.display = 'none';
       document.body.style.overflow = 'hidden';
     }
 
-    const page = document.getElementById('page');
-    const buttons = document.querySelectorAll('.animated-btn');
+    let bg = document.body;
+    let idleTimer;
+    let idleDelay = 2500;
 
-    buttons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        const url = button.getAttribute('data-link');
-        setTimeout(() => {
-          window.location.href = url;
-        }, 200);
-      });
-    });
-
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.addEventListener('keydown', e => {
-      if ((e.ctrlKey && ['c','s','u','a'].includes(e.key.toLowerCase())) ||
-          (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
-          e.key === 'F12') {
-        e.preventDefault();
-      }
-    });
-
-    // Detect if devtools are open
-    let devtoolsOpen = false;
-    const detectDevTools = () => {
-      const start = new Date();
-      debugger;
-      const end = new Date();
-      devtoolsOpen = end - start > 100;
-      if (devtoolsOpen) {
-        page.classList.add('hidden');
-        window.open("https://www.google.com/search?q=Developer+mode+is+not+allowed", "_blank");
-      } else {
-        page.classList.remove('hidden');
-      }
+    const pauseBg = () => {
+      bg.classList.add('paused');
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        bg.classList.remove('paused');
+      }, idleDelay);
     };
 
-    setInterval(detectDevTools, 1000);
+    window.addEventListener('mousemove', pauseBg);
+    window.addEventListener('scroll', pauseBg);
+    window.addEventListener('keydown', pauseBg);
+
+    const buttons = document.querySelectorAll('.animated-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', e => {
+        e.preventDefault();
+        const url = button.getAttribute('data-link');
+        setTimeout(() => window.location.href = url, 200);
+      });
+    });
   </script>
 </body>
 </html>
