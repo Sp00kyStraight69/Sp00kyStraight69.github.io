@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1024">
   <title>Sp00kyStraight69's Website</title>
   <style>
     :root {
@@ -31,6 +31,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .container {
@@ -76,14 +77,40 @@
       transform: scale(0.9) rotate(-2deg);
     }
 
-    @keyframes clickAnim {
-      0% { transform: scale(1); }
-      50% { transform: scale(0.9); }
-      100% { transform: scale(1); }
+    #mobile-warning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: white;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: var(--font-main);
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #mobile-warning h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    #mobile-warning p {
+      font-size: 18px;
     }
   </style>
 </head>
 <body id="page">
+  <div id="mobile-warning">
+    <h2>Mobile Not Supported</h2>
+    <p>This website is only available on desktop. Please visit from a computer.</p>
+  </div>
+
   <div class="container">
     <h1>Hi I'm Sp00kyStraight69</h1>
     <p>Welcome to my website</p>
@@ -96,13 +123,20 @@
   </div>
 
   <script>
+    // Detect mobile devices
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    if (isMobile) {
+      document.getElementById('mobile-warning').style.display = 'flex';
+      document.querySelector('.container').style.display = 'none';
+      document.body.style.overflow = 'hidden';
+    }
+
     const page = document.getElementById('page');
     const buttons = document.querySelectorAll('.animated-btn');
 
     buttons.forEach(button => {
       button.addEventListener('click', (e) => {
         e.preventDefault();
-        button.classList.add('clicked');
         const url = button.getAttribute('data-link');
         setTimeout(() => {
           window.location.href = url;
@@ -119,17 +153,13 @@
       }
     });
 
+    // Detect if devtools are open
     let devtoolsOpen = false;
     const detectDevTools = () => {
       const start = new Date();
       debugger;
       const end = new Date();
-      if (end - start > 100) {
-        devtoolsOpen = true;
-      } else {
-        devtoolsOpen = false;
-      }
-
+      devtoolsOpen = end - start > 100;
       if (devtoolsOpen) {
         page.classList.add('hidden');
         window.open("https://www.google.com/search?q=Developer+mode+is+not+allowed", "_blank");
