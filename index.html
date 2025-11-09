@@ -4,12 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=1024" />
   <title>Sp00kyStraight69's Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
     :root {
       --color-btn: #236dcf;
-      --color-btn-glow: #3f8fff;
-      --color-text: #33ccff; /* neon blue */
+      --color-text: #33ccff;
       --font-main: 'Press Start 2P', monospace;
       --btn-width: 300px;
       --btn-radius: 4px;
@@ -25,32 +26,26 @@
     html, body {
       height: 100%;
       width: 100%;
-      font-family: var(--font-main);
+      font-family: var(--font-main), monospace;
       user-select: none;
       color: var(--color-text);
       background-color: var(--bg-color);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* vertical and horizontal center */
+      justify-content: center;
       overflow: hidden;
-      text-align: center; /* center all text */
+      text-align: center;
     }
 
     .title-area {
-      animation: flicker 3s infinite alternate;
-      text-shadow:
-        0 0 5px var(--color-text),
-        0 0 10px var(--color-text),
-        0 0 20px var(--color-text),
-        0 0 40px #1a9eee;
-      margin-bottom: 40px; /* space between title and buttons */
+      margin-bottom: 40px; 
     }
 
     .title-area h1 {
       font-size: 36px;
       line-height: 1.2;
-      margin-bottom: 40px; /* increased space below heading */
+      margin-bottom: 40px;
       letter-spacing: 2px;
     }
 
@@ -81,20 +76,14 @@
       background: transparent;
       border: 2px solid var(--color-text);
       border-radius: var(--btn-radius);
-      box-shadow:
-        0 0 5px var(--color-text),
-        inset 0 0 10px var(--color-text);
       cursor: pointer;
-      transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
       user-select: none;
     }
 
     .old-school-btn:hover {
       background: var(--color-text);
       color: #000;
-      box-shadow:
-        0 0 15px var(--color-text),
-        inset 0 0 20px #00ccff;
       transform: scale(1.05);
     }
 
@@ -110,7 +99,7 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      font-family: var(--font-main);
+      font-family: var(--font-main), monospace;
       z-index: 9999;
       padding: 20px;
       text-align: center;
@@ -119,32 +108,16 @@
     #warning-screen h2 {
       font-size: 28px;
       margin-bottom: 10px;
-      text-shadow: 0 0 5px red;
     }
 
     #warning-screen p {
       font-size: 16px;
     }
-
-    @keyframes flicker {
-      0%, 100% {
-        opacity: 1;
-        text-shadow:
-          0 0 5px var(--color-text),
-          0 0 10px var(--color-text),
-          0 0 20px var(--color-text),
-          0 0 40px #1a9eee;
-      }
-      50% {
-        opacity: 0.7;
-        text-shadow: none;
-      }
-    }
   </style>
 </head>
-<body id="page">
+<body>
 
-  <div id="warning-screen">
+  <div id="warning-screen" role="alert" aria-live="assertive">
     <h2>Not Supported</h2>
     <p>This website is only available on desktop. Please visit from a computer.</p>
   </div>
@@ -155,29 +128,49 @@
   </div>
 
   <div class="button-area">
-    <a data-link="https://www.youtube.com/@Sp00kyStraight69" class="old-school-btn">My YouTube Channel</a>
-    <a data-link="https://sp00kystraight69.carrd.co" class="old-school-btn">My carrd.co</a>
-    <a data-link="https://x.com/Sp00kyStraight" class="old-school-btn">My X Account</a>
+    <a href="https://www.youtube.com/@Sp00kyStraight69" target="_blank" rel="noopener" class="old-school-btn">My YouTube Channel</a>
+    <a href="https://sp00kystraight69.carrd.co" target="_blank" rel="noopener" class="old-school-btn">My carrd.co</a>
+    <a href="https://x.com/Sp00kyStraight" target="_blank" rel="noopener" class="old-school-btn">My X Account</a>
   </div>
 
   <script>
-    const isWindows = navigator.userAgent.includes("Windows");
-    if (!isWindows) {
-      document.getElementById('warning-screen').style.display = 'flex';
-      document.querySelector('.title-area').style.display = 'none';
-      document.querySelector('.button-area').style.display = 'none';
-      document.body.style.overflow = 'hidden';
-    }
+    (function(){
+      const isWindows = navigator.userAgent.includes("Windows");
+      if (!isWindows){
+        document.getElementById('warning-screen').style.display = 'flex';
+        document.querySelector('.title-area').style.display = 'none';
+        document.querySelector('.button-area').style.display = 'none';
+        document.body.style.overflow = 'hidden';
+      }
 
-    const buttons = document.querySelectorAll('.old-school-btn');
-    buttons.forEach(button => {
-      button.addEventListener('click', e => {
-        e.preventDefault();
-        const url = button.getAttribute('data-link');
-        setTimeout(() => window.location.href = url, 200);
+      const anchors = document.querySelectorAll('a[rel="noopener"]');
+      anchors.forEach(anchor => {
+        anchor.addEventListener('click', e => {
+          e.preventDefault();
+          const url = anchor.href;
+          try {
+            const newWin = window.open(url, '_blank', 'noopener');
+            if (!newWin) alert('Popup blocked! Please allow popups for this site.');
+          } catch {
+            alert('Error opening the link.');
+          }
+        });
       });
-    });
+
+      // Disable some devtools keys and right click
+      document.addEventListener('keydown', e => {
+        if (
+          e.key === 'F12' ||
+          (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) ||
+          (e.ctrlKey && e.key.toUpperCase() === 'U')
+        ) {
+          e.preventDefault();
+          alert("Developer tools access is disabled.");
+        }
+      });
+
+      window.addEventListener('contextmenu', e => e.preventDefault());
+    })();
   </script>
 </body>
 </html>
-
