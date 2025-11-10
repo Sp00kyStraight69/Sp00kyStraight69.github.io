@@ -15,6 +15,8 @@
       --btn-width: 300px;
       --btn-radius: 4px;
       --bg-color: #000000;
+      --credits-bg-color: #111122;
+      --credits-text-color: #ffcc00;
     }
 
     * {
@@ -36,6 +38,12 @@
       justify-content: center;
       overflow: hidden;
       text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    body.credits-active {
+      background-color: var(--credits-bg-color);
+      color: var(--credits-text-color);
     }
 
     .title-area {
@@ -47,12 +55,23 @@
       line-height: 1.2;
       margin-bottom: 40px;
       letter-spacing: 2px;
+      transition: color 0.3s ease;
+    }
+
+    body.credits-active .title-area h1 {
+      color: var(--credits-text-color);
     }
 
     .title-area p {
       font-size: 14px;
       opacity: 0.8;
       letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    body.credits-active .title-area p {
+      color: var(--credits-text-color);
+      opacity: 1;
     }
 
     .button-area {
@@ -62,6 +81,11 @@
       width: 100%;
       max-width: 320px;
       align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    body.credits-active .button-area {
+      color: var(--credits-text-color);
     }
 
     .old-school-btn {
@@ -70,6 +94,7 @@
       padding: 16px 0;
       font-size: 14px;
       font-weight: bold;
+      font-family: var(--font-main), monospace; /* Font fix */
       color: var(--color-text);
       text-align: center;
       text-decoration: none;
@@ -81,10 +106,41 @@
       user-select: none;
     }
 
+    body.credits-active .old-school-btn {
+      color: var(--credits-text-color);
+      border-color: var(--credits-text-color);
+    }
+
     .old-school-btn:hover {
       background: var(--color-text);
       color: #000;
       transform: scale(1.05);
+    }
+
+    body.credits-active .old-school-btn:hover {
+      background: var(--credits-text-color);
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    #credits-section {
+      display: none;
+      max-width: 400px;
+      margin-top: 40px;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--credits-text-color);
+      user-select: text;
+      text-align: center;
+      padding: 20px;
+      border: 1px solid var(--credits-text-color);
+      border-radius: 8px;
+      background: rgba(255, 204, 0, 0.1);
+      transition: opacity 0.3s ease;
+    }
+
+    #credits-section.active {
+      display: block;
     }
 
     #warning-screen {
@@ -131,6 +187,11 @@
     <a href="https://www.youtube.com/@Sp00kyStraight69" target="_blank" rel="noopener" class="old-school-btn">My YouTube Channel</a>
     <a href="https://sp00kystraight69.carrd.co" target="_blank" rel="noopener" class="old-school-btn">My carrd.co</a>
     <a href="https://x.com/Sp00kyStraight" target="_blank" rel="noopener" class="old-school-btn">My X Account</a>
+    <button id="credits-btn" class="old-school-btn" aria-pressed="false">Credits</button>
+  </div>
+
+  <div id="credits-section" aria-live="polite" aria-hidden="true">
+    <p>Website created by <a href="https://www.youtube.com/@Sp00kyStraight69" target="_blank" rel="noopener" style="color:inherit; text-decoration: underline;">Sp00kyStraight69</a>. Fonts provided by <a href="https://fonts.google.com/" target="_blank" rel="noopener" style="color:inherit; text-decoration: underline;">Google Fonts</a>. Shout out to my friend PainScreen.</p>
   </div>
 
   <script>
@@ -154,12 +215,21 @@
           e.preventDefault();
           const url = anchor.href;
           try {
-            const newWin = window.open(url, '_blank', 'noopener');
-            if (!newWin) alert('Popup blocked! Please allow popups for this site.');
+            window.open(url, '_blank', 'noopener');
           } catch {
             alert('Error opening the link.');
           }
         });
+      });
+
+      const creditsBtn = document.getElementById('credits-btn');
+      const creditsSection = document.getElementById('credits-section');
+
+      creditsBtn.addEventListener('click', () => {
+        const active = creditsSection.classList.toggle('active');
+        document.body.classList.toggle('credits-active', active);
+        creditsBtn.setAttribute('aria-pressed', active);
+        creditsSection.setAttribute('aria-hidden', !active);
       });
 
       document.addEventListener('keydown', e => {
@@ -178,4 +248,3 @@
   </script>
 </body>
 </html>
-
