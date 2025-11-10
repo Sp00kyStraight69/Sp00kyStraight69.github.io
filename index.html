@@ -124,6 +124,7 @@
     }
 
     #credits-section {
+      display: none;
       max-width: 400px;
       margin-top: 40px;
       font-size: 14px;
@@ -135,17 +136,11 @@
       border: 1px solid var(--credits-text-color);
       border-radius: 8px;
       background: rgba(255, 204, 0, 0.1);
-      
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-      display: none;
+      transition: opacity 0.3s ease;
     }
 
     #credits-section.active {
       display: block;
-      opacity: 1;
-      pointer-events: auto;
     }
 
     #warning-screen {
@@ -189,9 +184,9 @@
   </div>
 
   <div class="button-area">
-    <a href="https://www.youtube.com/@Sp00kyStraight69" class="old-school-btn">My YouTube Channel</a>
-    <a href="https://sp00kystraight69.carrd.co" class="old-school-btn">My carrd.co</a>
-    <a href="https://x.com/Sp00kyStraight" class="old-school-btn">My X Account</a>
+    <a href="https://www.youtube.com/@Sp00kyStraight69" target="_blank" rel="noopener" class="old-school-btn">My YouTube Channel</a>
+    <a href="https://sp00kystraight69.carrd.co" target="_blank" rel="noopener" class="old-school-btn">My carrd.co</a>
+    <a href="https://x.com/Sp00kyStraight" target="_blank" rel="noopener" class="old-school-btn">My X Account</a>
     <button id="credits-btn" class="old-school-btn" aria-pressed="false">Credits</button>
   </div>
 
@@ -214,37 +209,27 @@
         document.body.style.overflow = 'hidden';
       }
 
-      // Open links in current tab by setting window.location.href
-      const anchors = document.querySelectorAll('.old-school-btn[href]');
+      const anchors = document.querySelectorAll('a[rel="noopener"]');
       anchors.forEach(anchor => {
         anchor.addEventListener('click', e => {
           e.preventDefault();
           const url = anchor.href;
-          window.location.href = url; // Open in same tab replacing your website
+          try {
+            window.open(url, '_blank', 'noopener');
+          } catch {
+            alert('Error opening the link.');
+          }
         });
       });
 
       const creditsBtn = document.getElementById('credits-btn');
       const creditsSection = document.getElementById('credits-section');
-      let fadeTimeout;
 
       creditsBtn.addEventListener('click', () => {
         const active = creditsSection.classList.toggle('active');
         document.body.classList.toggle('credits-active', active);
         creditsBtn.setAttribute('aria-pressed', active);
         creditsSection.setAttribute('aria-hidden', !active);
-
-        if (active) {
-          clearTimeout(fadeTimeout); // Clear previous timeout if any
-          fadeTimeout = setTimeout(() => {
-            creditsSection.classList.remove('active');
-            document.body.classList.remove('credits-active');
-            creditsBtn.setAttribute('aria-pressed', false);
-            creditsSection.setAttribute('aria-hidden', true);
-          }, 3000);
-        } else {
-          clearTimeout(fadeTimeout);
-        }
       });
 
       document.addEventListener('keydown', e => {
@@ -263,4 +248,3 @@
   </script>
 </body>
 </html>
-
