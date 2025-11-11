@@ -1,3 +1,3 @@
 Basic website coding.
 
-I recommend you visit my Carrd.co instead of this website because I am experimenting with this site. It will probably be deleted sooner or later I’m not sure but it will likely be made private.
+I recommend you visit my Carrd.co instead of this website because this project will be archived and won't be using it nor will update anything about it.
