@@ -1,4 +1,4 @@
 **Basic website coding.**
 
-I’d still recommend visiting my Carrd.co page. This project will be used for different reasons from now on
+I’d still recommend visiting my Carrd.co page. I probably would add new stuff or just leave it like this idk.
 
