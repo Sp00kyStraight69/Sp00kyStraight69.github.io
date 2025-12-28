@@ -1,4 +1,3 @@
-**Basic website coding.**
+**Project is archived**
 
-I’d still recommend visiting my Carrd.co page. I probably would add new stuff or just leave it like this idk.
-
+Won't be coming back to this project at all. Check out my https://sp00kystraight69.carrd.co Probably will change stuff on it or add new stuff on about me part.
