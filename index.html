@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sp00kyStraight69</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lora', Georgia, serif;
+    color: white;
+    background: #0a0a0a;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #f0e8d8;
+}
+
+/* Grid layout */
+.main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    max-width: 1300px;
+    margin: 60px auto;
+    padding: 0 60px;
+    align-items: start;
+}
+
+/* Left content */
+.left {
+    text-align: left;
+    padding-right: 20px;
+}
+
+/* Right content */
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+iframe {
+    width: 100%;
+    max-width: 800px;
+    height: 450px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Text styles */
+h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #e8dcc8;
+    letter-spacing: 0.02em;
+}
+
+.right h2 {
+    margin-bottom: 16px;
+}
+
+p {
+    font-family: 'Lora', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #b0a898;
+    margin: 0 0 8px 0;
+}
+
+section {
+    margin-bottom: 36px;
+}
+
+a {
+    color: #c8aa80;
+    text-decoration: none;
+    border-bottom: 1px solid #c8aa8055;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+a:hover {
+    color: #e8c898;
+    border-bottom-color: #e8c898;
+}
+
+/* Footer */
+footer {
+    text-align: left;
+    padding: 20px 60px;
+    color: #444;
+    font-family: 'Lora', Georgia, serif;
+    font-size: 13px;
+    font-style: italic;
+    border-top: 1px solid #1a1a1a;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .main {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 24px;
+        margin: 40px auto;
+    }
+
+    .left {
+        padding-right: 0;
+    }
+
+    .right {
+        align-items: center;
+    }
+
+    iframe {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+
+    footer {
+        padding: 20px 24px;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to my website</h1>
+</header>
+
+<div class="main">
+    <div class="left">
+        <section>
+            <h2>About Me</h2>
+            <p>I'm a YouTuber who has been making FNF covers and visualizers since 2024.</p>
+        </section>
+
+        <section>
+            <h2>Social Media's I have</h2>
+            <p><a href="https://www.youtube.com/@Sp00kyStraight69" target="_blank">Visit my YouTube channel</a></p>
+        </section>
+    </div>
+
+    <div class="right">
+        <h2>Latest Visualizer</h2>
+        <iframe src="https://www.youtube.com/embed/rpCB_bIx-V0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Sp00kyStraight69</p>
+</footer>
+
+</body>
+</html>
